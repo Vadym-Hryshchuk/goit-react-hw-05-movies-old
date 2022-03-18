@@ -1,3 +1,19 @@
-const HomePage = () => <h1>Hello world</h1>;
+import { useEffect, useState } from 'react';
+import * as fetchMovie from '../services/fetchMovieAPI';
 
-export default HomePage;
+export default function HomePage() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    fetchMovie.getTrendingMovie().then(({ results }) => {
+      setMovies(results);
+    });
+  }, []);
+  return (
+    <ul>
+      {movies.map(movie => (
+        <li key={movie.id}>{movie.title ?? movie.name}</li>
+      ))}
+    </ul>
+  );
+}
