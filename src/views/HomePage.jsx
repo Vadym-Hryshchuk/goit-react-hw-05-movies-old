@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import * as fetchMovie from '../services/fetchMovieAPI';
+import ListMovie from '../components/ListMovie';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -9,11 +11,10 @@ export default function HomePage() {
       setMovies(results);
     });
   }, []);
+
   return (
-    <ul>
-      {movies.map(movie => (
-        <li key={movie.id}>{movie.title ?? movie.name}</li>
-      ))}
-    </ul>
+    <>
+      <ListMovie movies={movies} />
+    </>
   );
 }
