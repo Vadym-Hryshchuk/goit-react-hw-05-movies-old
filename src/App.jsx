@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import HomePage from './views/HomePage';
 import MoviesPage from './views/MoviesPage';
 import MovieDetailsPage from './views/MovieDetailsPage';
+import Cast from './components/Cast';
 
 function App() {
   // fetchMovie.getTrendingMovie().then(console.log);
@@ -17,7 +18,7 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
         <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MoviesPage />} />
+          <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<MoviesPage />} />
         </Route>
       </Route>
