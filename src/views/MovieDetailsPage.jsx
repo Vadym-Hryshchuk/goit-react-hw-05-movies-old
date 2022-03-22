@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import * as fetchMovie from '../services/fetchMovieAPI';
 
 // import { useLocation } from 'react-router-dom';
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-  const { pathname } = useLocation();
 
   const [movie, SetMovie] = useState([]);
 
@@ -23,7 +22,7 @@ export default function MovieDetailsPage() {
   };
 
   useEffect(() => {
-    fetchMovie.gethMovieDetails(movieId).then(SetMovie);
+    fetchMovie.getMovieDetails(movieId).then(SetMovie);
   }, [movieId]);
 
   return (
@@ -44,8 +43,9 @@ export default function MovieDetailsPage() {
           <p>{createGenresList(movie.genres)}</p>
         </div>
       </div>
-      <NavLink to={`${pathname}/cast`}> Cast </NavLink>
-      <NavLink to={`${pathname}/reviews`}> Reviews </NavLink>
+      <NavLink to={`/movies/${movieId}/cast`}> Cast </NavLink>
+      <NavLink to={`/movies/${movieId}/reviews`}> Reviews </NavLink>
+
       <Outlet />
     </main>
   );

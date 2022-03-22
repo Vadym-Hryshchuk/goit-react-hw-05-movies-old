@@ -12,25 +12,25 @@ export function getTrendingMovie() {
   return fetchMovie(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`);
 }
 
-export function searchMovies(query = 'cat', page = 1) {
+export function searchMovies(query, page = 1) {
   return fetchMovie(
     `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`,
   );
 }
 
-export function gethMovieDetails(id = 496450) {
+export function getMovieDetails(id) {
   return fetchMovie(
     `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`,
   );
 }
 
-export function gethMovieCredits(id = 496450) {
+export function getMovieCredits(id) {
   return fetchMovie(
     `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`,
   );
 }
 
-export function gethMovieReviews(id = 11694, page = 1) {
+export function getMovieReviews(id, page = 1) {
   return fetchMovie(
     `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=${page}`,
   );
