@@ -1,18 +1,13 @@
 import React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
+import {
+  SearchBarButton,
+  SearchBarInput,
+  SearchForm,
+} from './SearchForm.styled';
 
-// import { FcSearch } from 'react-icons/fc';
-// import { ReactComponent as Pixabay } from './pixabay.svg';
-// import {
-//   Header,
-//     SearchForm,
-//   SearchFormButton,
-//   SearchFormButtonLabel,
-//   SearchFormInput,
-// } from './Searchbar.styled';
-
-const SearchForm = ({ onSubmit }) => {
+const SearchBar = ({ onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const searchQuery = e.currentTarget.elements.query.value;
@@ -23,12 +18,12 @@ const SearchForm = ({ onSubmit }) => {
     e.currentTarget.reset();
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">
+    <SearchForm onSubmit={handleSubmit}>
+      <SearchBarButton type="submit">
         <span>Search</span>
-      </button>
+      </SearchBarButton>
 
-      <input
+      <SearchBarInput
         name="query"
         type="text"
         autoComplete="off"
@@ -36,12 +31,12 @@ const SearchForm = ({ onSubmit }) => {
         placeholder="Search movies"
       />
       <Toaster />
-    </form>
+    </SearchForm>
   );
 };
 
-export default SearchForm;
+export default SearchBar;
 
-SearchForm.propTypes = {
+SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };

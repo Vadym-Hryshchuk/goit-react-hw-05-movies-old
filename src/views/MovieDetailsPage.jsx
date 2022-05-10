@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import * as fetchMovie from '../services/fetchMovieAPI';
+import defaultPoster from '../defaultData/defaultMovie.svg';
+import MainContent from '../components/MainContent/MainContent';
+import MovieDetailsLink from '../components/MovieDetailsLink/MovieDetailsLink';
+import BtnGoBack from '../components/BtnGoBack/BtnGoBack';
 
-// import { useLocation } from 'react-router-dom';
 export default function MovieDetailsPage() {
+  const [movie, setMovie] = useState([]);
   const { movieId } = useParams();
-
-  const [movie, SetMovie] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const createSRC = posterPath => {
-    return `https://image.tmdb.org/t/p/w300//${posterPath}`;
+    if (!posterPath) {
+      return defaultPoster;
+    }
+    return `https://image.tmdb.org/t/p/w500//${posterPath}`;
   };
 
   const createGenresList = genres => {
@@ -22,31 +29,23 @@ export default function MovieDetailsPage() {
   };
 
   useEffect(() => {
-    fetchMovie.getMovieDetails(movieId).then(SetMovie);
+    fetchMovie.getMovieDetails(movieId).then(setMovie);
   }, [movieId]);
 
-  return (
-    <main>
-      <div style={{ display: 'flex' }}>
-        <img
-          src={createSRC(movie.poster_path)}
-          alt={movie.title ?? movie.name}
-        />
-        <div>
-          <h1>{movie.title ?? movie.name}</h1>
-          <p>
-            <span>{`User Score: ${movie.vote_average}`}</span>
-          </p>
-          <h2>Owerview</h2>
-          <p>{movie.overview}</p>
-          <h2>Genres</h2>
-          <p>{createGenresList(movie.genres)}</p>
-        </div>
-      </div>
-      <NavLink to={`/movies/${movieId}/cast`}> Cast </NavLink>
-      <NavLink to={`/movies/${movieId}/reviews`}> Reviews </NavLink>
+  const goBack = () => {
+    navigate(location?.state?.from ?? '/');
+  };
 
+  return (
+    <>
+      <BtnGoBack onClick={goBack} />
+      <MainContent
+        movie={movie}
+        src={createSRC}
+        genresList={createGenresList}
+      />
+      <MovieDetailsLink state={{ from: location?.state?.from }} />
       <Outlet />
-    </main>
+    </>
   );
 }

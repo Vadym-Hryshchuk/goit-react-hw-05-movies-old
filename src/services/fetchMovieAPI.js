@@ -9,10 +9,10 @@ async function fetchMovie(url) {
 }
 
 export function getTrendingMovie() {
-  return fetchMovie(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`);
+  return fetchMovie(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`);
 }
 
-export function searchMovies(query, page = 1) {
+export function searchMovies(query, page) {
   return fetchMovie(
     `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`,
   );
