@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { NavLinkList, NavLinkStyled } from './MovieDetailsLink.styled';
 
 export default function MovieDetailsLink({ state }) {
@@ -16,3 +17,7 @@ export default function MovieDetailsLink({ state }) {
     </NavLinkList>
   );
 }
+
+MovieDetailsLink.propTypes = {
+  state: PropTypes.object.isRequired,
+};

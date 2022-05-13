@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Container, PosterImg, Wrapper } from './MainContent.styled';
 
 export default function MainContent({ movie, src, genresList }) {
@@ -20,3 +21,8 @@ export default function MainContent({ movie, src, genresList }) {
     </main>
   );
 }
+
+MainContent.propTypes = {
+  src: PropTypes.func.isRequired,
+  genresList: PropTypes.func.isRequired,
+};

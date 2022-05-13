@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import {
   LinkStyled,
@@ -31,3 +32,10 @@ export default function ListMovie({ movies }) {
     </MovieList>
   );
 }
+
+ListMovie.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  name: PropTypes.string,
+  poster_path: PropTypes.string,
+};
