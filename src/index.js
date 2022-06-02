@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App/App';
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/goit-react-hw-05-movies/">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
